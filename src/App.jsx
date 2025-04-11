@@ -12,6 +12,7 @@ import Equipe from "./pages/Equipe";
 import ContactPage from "./pages/ContactPage";
 import Projets from "./pages/Projets";
 import ProjetDetail from "./pages/ProjetDetail";
+import ChatIA from "./pages/ChatIA";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -24,6 +25,7 @@ function AnimatedRoutes() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/projets" element={<Projets />} />
         <Route path="/projets/:id" element={<ProjetDetail />} />
+        <Route path="/ia" element={<ChatIA />} />
       </Routes>
     </AnimatePresence>
   );

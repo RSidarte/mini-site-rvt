@@ -28,6 +28,11 @@ function Navbar() {
               Projets
             </Link>
           </li>
+          <li>
+            <Link to="/ia" className="hover:text-blue-500">
+              IA
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>
