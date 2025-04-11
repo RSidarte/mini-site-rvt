@@ -15,6 +15,7 @@ function App() {
         <Team />
         <Contact />
       </main>
+      <Footer />
     </>
   );
 }
