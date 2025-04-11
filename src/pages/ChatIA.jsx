@@ -1,15 +1,32 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import PageWrapper from "../components/PageWrapper";
 
 function ChatIA() {
   const [question, setQuestion] = useState("");
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
+  const [chat, setChat] = useState([]);
+
+  const bottomRef = useRef(null);
+
+  // ✅ Charger historique depuis localStorage au chargement
+  useEffect(() => {
+    const saved = localStorage.getItem("chat-history");
+    if (saved) {
+      setChat(JSON.parse(saved));
+    }
+  }, []);
+
+  // ✅ Scroll vers le bas après chaque message
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chat]);
 
   const handleAsk = async () => {
     if (!question.trim()) return;
     setLoading(true);
     setResponse("");
+
     try {
       const res = await fetch("http://localhost:11434/api/generate", {
         method: "POST",
@@ -42,6 +59,15 @@ function ChatIA() {
           }
         }
       }
+
+      // ✅ Ajout à l’historique + sauvegarde
+      setChat((prev) => {
+        const updated = [...prev, { question, answer: fullText }];
+        localStorage.setItem("chat-history", JSON.stringify(updated));
+        return updated;
+      });
+
+      setQuestion("");
     } catch (err) {
       setResponse("❌ Erreur : impossible de contacter l’IA");
     } finally {
@@ -55,6 +81,18 @@ function ChatIA() {
         <h2 className="text-3xl font-bold text-center mb-6">
           💬 Chat IA Local
         </h2>
+
+        {chat.length > 0 && (
+          <button
+            onClick={() => {
+              setChat([]);
+              localStorage.removeItem("chat-history");
+            }}
+            className="text-sm text-red-600 underline mb-4"
+          >
+            🗑️ Vider la conversation
+          </button>
+        )}
 
         <textarea
           rows="4"
@@ -72,11 +110,39 @@ function ChatIA() {
           {loading ? "Réfléchit..." : "Envoyer"}
         </button>
 
-        {response && (
-          <div className="w-full max-w-xl bg-white p-4 rounded shadow">
-            <p className="text-gray-800 whitespace-pre-line">{response}</p>
-          </div>
-        )}
+        <div className="w-full max-w-xl space-y-4">
+          {chat.map((entry, index) => (
+            <div key={index} className="flex flex-col gap-2">
+              {/* Message utilisateur */}
+              <div className="flex justify-end">
+                <div className="flex items-end gap-2 max-w-[75%]">
+                  <div className="bg-blue-500 text-white p-3 rounded-2xl rounded-br-sm shadow-md">
+                    <p className="whitespace-pre-line">{entry.question}</p>
+                  </div>
+                  <img
+                    src="https://api.dicebear.com/7.x/identicon/svg?seed=user"
+                    alt="avatar"
+                    className="w-8 h-8 rounded-full"
+                  />
+                </div>
+              </div>
+
+              {/* Réponse IA */}
+              <div className="flex justify-start">
+                <div className="flex items-end gap-2 max-w-[75%]">
+                  <img
+                    src="https://api.dicebear.com/7.x/bottts-neutral/svg?seed=ai"
+                    alt="ia-avatar"
+                    className="w-8 h-8 rounded-full"
+                  />
+                  <div className="bg-gray-200 text-gray-800 p-3 rounded-2xl rounded-bl-sm shadow">
+                    <p className="whitespace-pre-line">{entry.answer}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </section>
     </PageWrapper>
   );
