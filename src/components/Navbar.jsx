@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -9,18 +9,25 @@ function Navbar() {
         </Link>
         <ul className="flex space-x-4 text-gray-600 font-medium">
           <li>
-            <Link to="/" className="hover:text-blue-500">Accueil</Link>
+            <Link to="/" className="hover:text-blue-500">
+              Accueil
+            </Link>
           </li>
           <li>
-            <Link to="/equipe" className="hover:text-blue-500">Équipe</Link>
+            <Link to="/equipe" className="hover:text-blue-500">
+              Équipe
+            </Link>
           </li>
           <li>
-            <Link to="/contact" className="hover:text-blue-500">Contact</Link>
+            <Link to="/contact" className="hover:text-blue-500">
+              Contact
+            </Link>
           </li>
           <li>
-            <Link to="/projets" className="hover:text-blue-500">Projets</Link>
+            <Link to="/projets" className="hover:text-blue-500">
+              Projets
+            </Link>
           </li>
-
         </ul>
       </div>
     </nav>
