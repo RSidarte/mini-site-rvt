@@ -1,6 +1,7 @@
 import PageWrapper from "../components/PageWrapper";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 const projets = [
   {
@@ -75,13 +76,15 @@ function Projets() {
         <div className="flex flex-wrap gap-8 justify-center">
           {filteredProjects.map((projet) => (
             <motion.div
-            key={projet.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 0.1 * projets.indexOf(projet) }}
-            className="bg-white shadow-md rounded-lg w-80 overflow-hidden hover:shadow-lg transition-shadow duration-300"
-          >
-          
+              key={projet.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.3,
+                delay: 0.1 * projets.indexOf(projet),
+              }}
+              className="bg-white shadow-md rounded-lg w-80 overflow-hidden hover:shadow-lg transition-shadow duration-300"
+            >
               <img
                 src={projet.image}
                 alt={projet.title}
@@ -97,7 +100,7 @@ function Projets() {
                   Voir le projet →
                 </Link>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
