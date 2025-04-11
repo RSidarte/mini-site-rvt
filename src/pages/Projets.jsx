@@ -1,19 +1,20 @@
 import PageWrapper from '../components/PageWrapper';
 
 const projets = [
-  {
-    id: 'react-dashboard',
-    title: 'Dashboard React',
-    description: 'Un dashboard frontend moderne avec React, Vite et Tailwind.',
-    image: 'https://source.unsplash.com/400x300/?dashboard,code',
-  },
-  {
-    id: 'ia-chat',
-    title: 'Chat IA Local',
-    description: 'Un projet d’interface pour discuter avec une IA en local (Ollama).',
-    image: 'https://source.unsplash.com/400x300/?ai,chat',
-  },
-];
+    {
+      id: 'react-dashboard',
+      title: 'Dashboard React',
+      description: 'Un dashboard frontend moderne avec React, Vite et Tailwind.',
+      image: 'https://picsum.photos/id/1015/400/300', // image fixe
+    },
+    {
+      id: 'ia-chat',
+      title: 'Chat IA Local',
+      description: 'Un projet d’interface pour discuter avec une IA en local (Ollama).',
+      image: 'https://picsum.photos/id/1016/400/300',
+    },
+  ];
+  
 
 function Projets() {
   return (
