@@ -18,7 +18,7 @@ function Navbar() {
             <Link to="/contact" className="hover:text-blue-500">Contact</Link>
           </li>
           <li>
-            <Link to="/projets" className="hover:text-blue-500">Projets</Link>  
+            <Link to="/projets" className="hover:text-blue-500">Projets</Link>
           </li>
 
         </ul>
