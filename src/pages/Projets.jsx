@@ -1,4 +1,5 @@
 import PageWrapper from '../components/PageWrapper';
+import { Link } from 'react-router-dom';
 
 const projets = [
     {
@@ -31,12 +32,9 @@ function Projets() {
               <div className="p-4">
                 <h3 className="text-xl font-semibold mb-2">{projet.title}</h3>
                 <p className="text-gray-600 mb-4">{projet.description}</p>
-                <a
-                  href={`/projets/${projet.id}`}
-                  className="text-blue-500 hover:underline"
-                >
+                <Link to={`/projets/${projet.id}`} className="text-blue-500 hover:underline">
                   Voir le projet →
-                </a>
+                </Link>
               </div>
             </div>
           ))}
