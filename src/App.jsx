@@ -1,22 +1,23 @@
-import Hero from './sections/Hero';
-import About from './sections/About';
-import Team from './sections/Team';
-import Contact from './sections/Contact';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import Home from './pages/Home';
+import Equipe from './pages/Equipe';
+import ContactPage from './pages/ContactPage';
 
 function App() {
   return (
-    <>
+    <Router>
       <Navbar />
       <main className="pt-20">
-        <Hero />
-        <About />
-        <Team />
-        <Contact />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/equipe" element={<Equipe />} />
+          <Route path="/contact" element={<ContactPage />} />
+        </Routes>
       </main>
       <Footer />
-    </>
+    </Router>
   );
 }
 
