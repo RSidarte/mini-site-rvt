@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"name": "homelab-dashboard",
+			"path": "../../../homelab-dashboard"
+		},
+		{
+			"path": "../../../carte-profil"
+		},
+		{
+			"path": "../.."
+		}
+	],
+	"settings": {}
+}

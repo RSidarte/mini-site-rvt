@@ -32,10 +32,12 @@ function ChatIA() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          model: "llama3",
+          model: "mistral", // ✅ bon modèle
           prompt: question,
           stream: true,
         }),
+      });
+      
       });
 
       const reader = res.body.getReader();

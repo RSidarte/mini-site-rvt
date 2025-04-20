@@ -1,0 +1,15 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: homepage
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`site.labaky.fr`)
+      kind: Rule
+      services:
+        - name: homepage
+          port: 80
+  tls:
+    secretName: labaky-fr-tls
