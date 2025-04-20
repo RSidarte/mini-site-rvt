@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/RSidarte/mini-site-rvt.git
+    repoURL: https://github.com/RSidarte/mini-site-rvt
     targetRevision: HEAD
-    path: . # car les manifests sont à la racine du repo
+    path: ../k8s # car les manifests sont à la racine du repo
   destination:
     server: https://kubernetes.default.svc
     namespace: homepage
