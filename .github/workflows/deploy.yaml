@@ -1,31 +1,37 @@
-# .github/workflows/deploy.yaml
-name: Build and Push Docker Image
+name: Build, Push & Sync ArgoCD
 
 on:
   push:
-    branches: ["main"] # ou "master" si c’est ton cas
+    branches: [ "main" ]
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Docker Buildx
+      - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Login to Docker Hub
+      - name: Login to DockerHub
         uses: docker/login-action@v3
         with:
           username: sidarte
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push image
+      - name: Build and Push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
           file: ./Dockerfile
           push: true
           tags: sidarte/site-homepage:latest
+
+      - name: Sync ArgoCD App
+        run: |
+          curl -k -X POST https://argo.labaky.fr/api/v1/applications/homepage/sync \
+            -H "Authorization: Bearer $ARGOCD_TOKEN"
+        env:
+          ARGOCD_TOKEN: ${{ secrets.ARGOCD_BEARER_TOKEN }}
