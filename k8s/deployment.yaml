@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: homepage
-          image: sidarte/site-homepage:latest
+          image: sidarte/chat-ia:v1.1
           imagePullPolicy: Always
           ports:
             - containerPort: 80
