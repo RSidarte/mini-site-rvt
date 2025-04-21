@@ -27,17 +27,19 @@ function ChatIA() {
     setLoading(true);
     setResponse("");
 
+    // Randomly select a model between 'qwen' and 'deepseek'
+    const models = ["qwen", "deepseek"];
+    const selectedModel = models[Math.floor(Math.random() * models.length)];
+
     try {
       const res = await fetch("https://ollama.labaky.fr/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          model: "mistral", // ✅ bon modèle
+          model: selectedModel, // Use the randomly selected model
           prompt: question,
           stream: true,
         }),
-      });
-      
       });
 
       const reader = res.body.getReader();
