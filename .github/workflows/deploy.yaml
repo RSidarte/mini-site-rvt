@@ -2,7 +2,7 @@ name: Build, Push & Sync ArgoCD
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build-and-deploy:
@@ -31,7 +31,8 @@ jobs:
 
       - name: Sync ArgoCD App
         run: |
-          curl -k -X POST https://argo.labaky.fr/api/v1/applications/homepage/sync \
-            -H "Authorization: Bearer $ARGOCD_TOKEN"
+          RESPONSE=$(curl -k -X POST https://argo.labaky.fr/api/v1/applications/homepage/sync \
+            -H "Authorization: Bearer $ARGOCD_TOKEN")
+          echo "ArgoCD Sync Response: $RESPONSE"
         env:
           ARGOCD_TOKEN: ${{ secrets.ARGOCD_BEARER_TOKEN }}
